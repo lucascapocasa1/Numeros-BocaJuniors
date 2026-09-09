@@ -16,7 +16,7 @@ return [
     ],
 
     'from' => [
-        'address' => env('MAIL_FROM_ADDRESS', 'noreply@numerosazules.ar'),
-        'name'    => env('MAIL_FROM_NAME', 'Números Azules'),
+        'address' => env('MAIL_FROM_ADDRESS', 'noreply@numerosbocajuniors.ar'),
+        'name'    => env('MAIL_FROM_NAME', 'Números Boca Juniors'),
     ],
 ];

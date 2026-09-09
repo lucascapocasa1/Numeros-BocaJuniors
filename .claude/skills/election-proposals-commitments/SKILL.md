@@ -122,7 +122,7 @@ Toda propuesta que termine con 0 filas en `election_commitments` (ni compromiso 
 - "Describe la función genérica de un área/rol del club, no una acción con estado de cumplimiento verificable."
 - "Es un modelo/estilo de juego o un proceso de gestión interna sin entregable externo identificable — no tiene un criterio objetivo de cumplimiento."
 
-## Modelo de datos (numeros-rojos)
+## Modelo de datos (numeros-bocajuniors)
 - `election_lists`: id, token, name, `source_url` (string, obligatorio — URL de la fuente leída), logo_path/logo_original_name.
 - `election_proposals`: id, election_list_id (FK), title, description, order, `no_commitments_reason` (text nullable — obligatorio completar cuando la propuesta queda con 0 compromisos/metas, ver paso 5). **Sin `unit`/`unit_value`** — esos campos se removieron; toda la "forma de evaluar" vive dentro de `election_commitments`.
 - `election_commitments`: id, election_proposal_id (FK, cascadeOnDelete), `kind` (ENUM `compromiso`|`meta`, default `compromiso`), description (texto libre autocontenido, corto — ver 3c), `metric_value` (decimal nullable, solo si `kind=meta` y la cifra se puede aislar), `metric_unit` (string nullable), `deadline` (string libre nullable), order. Ver 3a para el criterio de clasificación.

@@ -14,7 +14,7 @@ class SitemapController extends Controller
 {
     public function index(): Response
     {
-        $baseUrl = rtrim(env('FRONTEND_URL', 'https://www.numerosazules.net'), '/');
+        $baseUrl = rtrim(env('FRONTEND_URL', 'https://www.numerosbocajuniors.net'), '/');
 
         $contracts     = Contract::select('id', 'updated_at')->orderBy('id')->get();
         $economyRecords = EconomyRecord::select('id', 'updated_at')->orderBy('id')->get();

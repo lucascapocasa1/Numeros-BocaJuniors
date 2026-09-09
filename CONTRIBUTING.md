@@ -39,7 +39,7 @@ Si querés replicar Números Rojos para tu institución, el punto de partida es:
 1. Cambiar las referencias al club en el frontend (principalmente en `HomePage.jsx` y `Footer.jsx`)
 2. Ajustar los seeders en `backend/database/seeders/` con datos de tu club
 3. Configurar las variables de entorno en `.env` y `backend/.env`
-4. Opcionalmente, reemplazar la integración de BeSoccer si usás otra fuente de estadísticas
+4. Opcionalmente, adaptar la integración de datos externos si usás otra fuente
 
 Si tenés dudas, abrí un Issue con la etiqueta `adaptacion-club` y te ayudamos.
 

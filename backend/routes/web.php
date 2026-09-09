@@ -4,7 +4,7 @@
 
 $router->get('/', function () {
     return response()->json([
-        'name'    => 'Números Azules API',
+        'name'    => 'Números Boca Juniors API',
         'version' => '1.0.0',
         'status'  => 'running',
     ]);

@@ -26,13 +26,6 @@ export const createRight = (data) => client.post('/admin/rights', data);
 export const updateRight = (id, data) => client.put(`/admin/rights/${id}`, data);
 export const deleteRight = (id) => client.delete(`/admin/rights/${id}`);
 
-// Stats
-export const getPlayerStats = (id) => client.get(`/player/${id}/stats`);
-export const getLeagueStats = (params = {}) => client.get('/league/stats', { params });
-export const getTeam = (params = {}) => client.get('/team', { params });
-export const getPlayerMatches = (id, year = null) => client.get(`/player/${id}/matches`, { params: year ? { year } : {} });
-export const getPlayer = (id) => client.get(`/player/${id}`);
-
 // Rumors
 export const getRumors = (params = {}) => client.get('/rumors', { params });
 export const getRumor = (id) => client.get(`/rumors/${id}`);

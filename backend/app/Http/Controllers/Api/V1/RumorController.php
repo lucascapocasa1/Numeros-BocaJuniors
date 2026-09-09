@@ -5,39 +5,14 @@ namespace App\Http\Controllers\Api\V1;
 use App\Http\Controllers\Controller;
 use App\Models\Market;
 use App\Models\Rumor;
-use App\Services\BeSoccerService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 
 class RumorController extends Controller
 {
-    private BeSoccerService $besoccerService;
-
-    public function __construct(BeSoccerService $besoccerService)
-    {
-        $this->besoccerService = $besoccerService;
-    }
-
     private function enrichWithPlayerAvatar(array $rumor): array
     {
-        if (!empty($rumor['external_id'])) {
-            $playerFull = $this->besoccerService->getPlayerData($rumor['external_id']);
-            if ($playerFull['success'] ?? false) {
-                $defaultAvatar = rtrim(env('FRONTEND_URL', 'http://localhost:5173'), '/') . '/default-avatar.svg';
-                $data = $playerFull['data'];
-                $rumor['player_avatar'] = $data['player_avatar'] ?? $defaultAvatar;
-                $rumor['country_flag']  = $data['country_flag'] ?? null;
-                $rumor['country']       = $data['country'] ?? null;
-                $team = $data['current_team'] ?? null;
-                $rumor['current_team_name'] = $team
-                    ? ($team['nameShow'] ?? $team['fullName'] ?? $team['name'] ?? null)
-                    : null;
-                $pos1 = $data['pos1'] ?? null;
-                $rumor['positions'] = !empty($pos1) ? [['pos' => $pos1]] : [];
-                $rumor['role'] = isset($data['role']) ? (int) $data['role'] : null;
-            }
-        }
         return $rumor;
     }
 

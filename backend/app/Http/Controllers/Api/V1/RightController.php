@@ -4,37 +4,13 @@ namespace App\Http\Controllers\Api\V1;
 
 use App\Http\Controllers\Controller;
 use App\Models\Right;
-use App\Services\BeSoccerService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
 class RightController extends Controller
 {
-    private BeSoccerService $besoccerService;
-
-    public function __construct(BeSoccerService $besoccerService)
-    {
-        $this->besoccerService = $besoccerService;
-    }
-
     private function enrichWithPlayerAvatar(array $right): array
     {
-        if (!empty($right['external_id'])) {
-            $playerFull = $this->besoccerService->getPlayerData($right['external_id']);
-            if ($playerFull['success'] ?? false) {
-                $defaultAvatar = rtrim(env('FRONTEND_URL', 'http://localhost:5173'), '/') . '/default-avatar.svg';
-                $data = $playerFull['data'];
-                $right['player_avatar'] = $data['player_avatar'] ?? $defaultAvatar;
-                $right['country_flag']  = $data['country_flag'] ?? null;
-                $right['country']       = $data['country'] ?? null;
-                $team = $data['current_team'] ?? null;
-                $right['current_team_name'] = $team
-                    ? ($team['nameShow'] ?? $team['fullName'] ?? $team['name'] ?? null)
-                    : null;
-                $pos1 = $data['pos1'] ?? null;
-                $right['positions'] = !empty($pos1) ? [['pos' => $pos1]] : [];
-            }
-        }
         return $right;
     }
 

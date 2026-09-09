@@ -28,7 +28,6 @@ import AdminStadiumPage from './pages/AdminStadiumPage';
 import AdminElectionsPage from './pages/AdminElectionsPage';
 import AdminElectionListFormPage from './pages/AdminElectionListFormPage';
 import StadiumPage from './pages/StadiumPage';
-import StatsPage from './pages/StatsPage';
 import RightsPage from './pages/RightsPage';
 import ElectionListPage from './pages/ElectionListPage';
 import ElectionsPage from './pages/ElectionsPage';
@@ -66,7 +65,6 @@ export default function App() {
         <Route path="/contratos/:id" element={<ContractDetailPage />} />
         <Route path="/balances" element={<BalancesPage />} />
         <Route path="/balances/:id" element={<BalanceDetailPage />} />
-        <Route path="/estadisticas" element={<StatsPage />} />
         <Route path="/estadio" element={<StadiumPage />} />
         <Route path="/derechos" element={<RightsPage />} />
         <Route path="/elecciones" element={<ElectionsPage />} />

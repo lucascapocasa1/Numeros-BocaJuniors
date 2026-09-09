@@ -37,7 +37,7 @@ export default function StadiumPage() {
   const [showPast, setShowPast] = useState(false);
 
   usePageMeta({
-    title: 'Estadio Alberto J. Armando (La Bombonera) | Números Azules',
+    title: 'Estadio Alberto J. Armando (La Bombonera) | Números Boca Juniors',
     description: 'Capacidad, sectores y datos del Estadio Alberto J. Armando (La Bombonera) del Club Atlético Boca Juniors.',
     path: '/estadio',
   });

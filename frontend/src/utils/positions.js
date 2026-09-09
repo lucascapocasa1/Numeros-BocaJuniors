@@ -1,5 +1,5 @@
-// BeSoccer position codes → Spanish full names
-// Covers Spanish abbreviations (primary BeSoccer format) and English codes (fallback)
+// Position codes → Spanish full names
+// Covers Spanish abbreviations and English codes (fallback)
 const POSITION_LABELS = {
   // Spanish codes
   POR: 'Arquero',

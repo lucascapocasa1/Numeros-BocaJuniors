@@ -1,8 +1,8 @@
 import { useEffect } from 'react';
 
-const BASE_URL = 'https://www.numerosazules.net';
-const DEFAULT_TITLE = 'Números Azules - Portal de datos del Club Atlético Boca Juniors';
-const DEFAULT_OG_TITLE = 'Números Azules - Portal de datos de Boca Juniors';
+const BASE_URL = 'https://www.numerosbocajuniors.net';
+const DEFAULT_TITLE = 'Números Boca Juniors - Portal de datos del Club Atlético Boca Juniors';
+const DEFAULT_OG_TITLE = 'Números Boca Juniors - Portal de datos de Boca Juniors';
 const DEFAULT_DESCRIPTION =
   'Los datos económicos, contractuales y deportivos que todo socio de Boca Juniors tiene que saber.';
 const DEFAULT_URL = `${BASE_URL}/`;

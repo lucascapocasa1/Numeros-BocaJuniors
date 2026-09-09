@@ -1,56 +1,15 @@
-# Numeros Azules - Portal de Transparencia
+# Numeros Boca Juniors - Portal de Transparencia
 
 **Los datos que todo socio de Boca Juniors tiene que saber.**
 
 Portal de datos abiertos del Club Atletico Boca Juniors (Argentina). Transparencia economica, contractual y deportiva.
 
+Basado en [Numeros Rojos](https://github.com/glesende/numeros-rojos) de Independiente de Avellaneda.
+
 ![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)
 ![Backend](https://img.shields.io/badge/Backend-Lumen%20PHP%208.2-orange)
 ![Frontend](https://img.shields.io/badge/Frontend-React%2018%20+%20Vite-blue)
 ![Docker](https://img.shields.io/badge/Infra-Docker-2496ED)
-
----
-
-## ¿Sos de otro club y querés replicarlo?
-
-Números Azules está diseñado para ser replicable. Si representás a una institución deportiva y querés tener tu propio portal de transparencia, podés clonar este repositorio y adaptarlo.
-
-**¿Qué necesitás cambiar?**
-
-| Qué | Dónde |
-|-----|-------|
-| Nombre e identidad del club | `frontend/src/pages/HomePage.jsx`, `frontend/src/components/layout/Footer.jsx` |
-| Datos iniciales | `backend/database/seeders/` |
-| Variables de entorno | `.env` y `backend/.env` |
-| Integración de estadísticas | `backend/app/Services/BeSoccerService.php` (opcional) |
-
-Si tenés dudas durante la adaptación, [abrí un Issue](https://github.com/glesende/numeros-rojos/issues) con la etiqueta `adaptacion-club`.
-
----
-
-## Dónde cargar tus fuentes
-
-Este clon viene con los datos de ejemplo reemplazados por **plantillas vacías**, marcadas con `TODO` y `[EJEMPLO]`, en:
-
-| Archivo | Sección | Fuente esperada |
-| --- | --- | --- |
-| `backend/database/seeders/EconomyRecordSeeder.php` | Compromisos económicos (cobros/pagos) | Link web o de X por cada registro, en el campo `links` |
-| `backend/database/seeders/ContractSeeder.php` | Contratos del plantel actual | Link web (Transfermarkt, prensa) o de X, en `links` |
-| `backend/database/seeders/RightSeeder.php` | Derechos económicos sobre jugadores vendidos | Link web o de X, en `links` |
-| `backend/database/seeders/BalanceSeeder.php` | Balances oficiales | **No usa `links`**: subís el PDF real del balance desde `/admin/balances` |
-
-En los primeros tres, cada registro tiene un campo `links` con este formato (tanto para páginas web como para posteos de X/Twitter):
-
-```php
-'links' => [
-    ['url' => 'https://ejemplo.com/nota-o-comunicado', 'official' => false],
-    ['url' => 'https://x.com/BocaJrsOficial/status/1234567890', 'official' => true],
-],
-```
-
-`official => true` solo si la fuente es el propio club; en cualquier otro caso (prensa, Transfermarkt, cuentas no oficiales) dejalo en `false`. Podés cargar los datos editando estos seeders y corriendo `make seed`, o directamente desde el panel admin (`/admin`) una vez levantado el proyecto.
-
-La sección "Estadio" viene deshabilitada (comentada en `DatabaseSeeder.php`) porque no era parte del alcance pedido; las secciones de "Rumores" y "Elecciones" siguen existiendo en el código pero sin datos — podés ignorarlas o desactivarlas desde `/admin/configuracion`.
 
 ---
 
@@ -71,7 +30,7 @@ La sección "Estadio" viene deshabilitada (comentada en `DatabaseSeeder.php`) po
 ## Estructura del proyecto
 
 ```
-numeros-rojos/
+numeros-bocajuniors/
 ├── backend/                  # API Lumen
 │   ├── app/
 │   │   ├── Console/Commands/ # Comandos (export CSV)
@@ -79,8 +38,7 @@ numeros-rojos/
 │   │   │   ├── Controllers/Api/V1/
 │   │   │   └── Middleware/
 │   │   ├── Models/           # EconomyRecord, Contract, User
-│   │   ├── Providers/
-│   │   └── Services/         # BeSoccerService
+│   │   └── Providers/
 │   ├── config/
 │   ├── database/
 │   │   ├── migrations/
@@ -105,33 +63,43 @@ numeros-rojos/
 
 ---
 
-## Inicio rapido
+## Inicio rapido (Windows)
+
+### Requisitos previos
+
+- [Docker Desktop](https://www.docker.com/products/docker-desktop/) instalado y corriendo
+- [Git](https://git-scm.com/) instalado
 
 ### 1. Clonar y configurar
 
-```bash
-git clone https://github.com/glesende/numeros-rojos numeros-rojos
-cd numeros-rojos
-make setup
+```powershell
+git clone https://github.com/lucascapocasa1/Numeros-BocaJuniors.git
+cd Numeros-BocaJuniors
+copy .env.example .env
+copy backend\.env.example backend\.env
 ```
-
-Editar `.env` y `backend/.env` si es necesario.
 
 ### 2. Levantar el entorno
 
-```bash
-make build
-make up
+```powershell
+docker compose build
+docker compose up -d
 ```
 
-### 3. Migrar y seedear
+### 3. Instalar dependencias
 
-```bash
-make migrate
-make seed
+```powershell
+docker compose exec frontend npm install
+docker compose exec api composer install
 ```
 
-### 4. Acceder
+### 4. Migrar y seedear
+
+```powershell
+docker compose exec api php artisan migrate:fresh --seed
+```
+
+### 5. Acceder
 
 | Servicio  | URL                          |
 |-----------|------------------------------|
@@ -142,30 +110,47 @@ make seed
 ### Credenciales admin por defecto
 
 ```
-Email:    admin@numerosazules.ar
+Email:    admin@numerosbocajuniors.ar
 Password: password
 ```
 
 ---
 
-## Comandos disponibles (Makefile)
+## Dónde cargar tus fuentes
 
-```bash
-make help              # Ver todos los comandos
-make up                # Levantar contenedores
-make down              # Detener contenedores
-make build             # Rebuild contenedores
-make logs              # Ver logs
-make migrate           # Correr migraciones
-make seed              # Correr seeders
-make fresh             # Migrate fresh + seed
-make test              # Correr tests PHPUnit
-make db                # Abrir MySQL CLI
-make redis-cli         # Abrir Redis CLI
-make shell-api         # Shell en el contenedor API
-make shell-frontend    # Shell en el contenedor frontend
-make export-csv TABLE=economy_records  # Exportar a CSV
-make clean             # Eliminar volumenes
+Los seeders vienen con **plantillas de ejemplo**. Reemplazalos con datos reales en:
+
+| Archivo | Sección | Fuente esperada |
+| --- | --- | --- |
+| `backend/database/seeders/EconomyRecordSeeder.php` | Compromisos económicos (cobros/pagos) | Link web o de X por cada registro, en el campo `links` |
+| `backend/database/seeders/ContractSeeder.php` | Contratos del plantel actual | Link web (Transfermarkt, prensa) o de X, en `links` |
+| `backend/database/seeders/RightSeeder.php` | Derechos económicos sobre jugadores vendidos | Link web o de X, en `links` |
+| `backend/database/seeders/BalanceSeeder.php` | Balances oficiales | Subí el PDF real del balance desde `/admin/balances` |
+
+Formato del campo `links`:
+
+```php
+'links' => [
+    ['url' => 'https://ejemplo.com/nota-o-comunicado', 'official' => false],
+    ['url' => 'https://x.com/BocaJrsOficial/status/1234567890', 'official' => true],
+],
+```
+
+`official => true` solo si la fuente es el propio club. Podés cargar datos editando los seeders o desde el panel admin (`/admin`).
+
+---
+
+## Comandos utiles (PowerShell)
+
+```powershell
+docker compose up -d              # Levantar contenedores
+docker compose down               # Detener contenedores
+docker compose build              # Rebuild contenedores
+docker compose logs -f            # Ver logs
+docker compose exec api php artisan migrate  # Migrar
+docker compose exec api php artisan db:seed  # Seedear
+docker compose exec api php artisan migrate:fresh --seed  # Reset completo
+docker compose exec mysql mysql -u app -psecret numeros_bocajuniors  # MySQL CLI
 ```
 
 ---
@@ -180,9 +165,9 @@ make clean             # Eliminar volumenes
 | GET    | /api/v1/economy/{id}          | Detalle de registro            |
 | GET    | /api/v1/contracts             | Listar contratos               |
 | GET    | /api/v1/contracts/{id}        | Detalle de contrato            |
-| GET    | /api/v1/standings             | Posiciones (BeSoccer)          |
-| GET    | /api/v1/player/{id}/stats     | Stats de jugador (BeSoccer)    |
-| GET    | /api/v1/league/stats          | Stats de liga (BeSoccer)       |
+| GET    | /api/v1/rights                | Derechos economicos            |
+| GET    | /api/v1/balances              | Balances oficiales             |
+| GET    | /api/v1/elections             | Elecciones                     |
 
 ### Filtros disponibles (economy)
 
@@ -208,24 +193,9 @@ make clean             # Eliminar volumenes
 | POST   | /api/v1/admin/contracts           | Crear contrato             |
 | PUT    | /api/v1/admin/contracts/{id}      | Actualizar contrato        |
 | DELETE | /api/v1/admin/contracts/{id}      | Eliminar contrato          |
-
----
-
-## BeSoccer
-
-Para activar las estadisticas en tiempo real:
-
-1. Obtener API key de BeSoccer
-2. Configurar en `.env`:
-   ```
-   BESOCCER_API_KEY=tu_api_key
-   ```
-3. Los TTL de cache son configurables via:
-   ```
-   CACHE_TTL_STANDINGS=3600
-   CACHE_TTL_PLAYER_STATS=1800
-   CACHE_TTL_LEAGUE_STATS=3600
-   ```
+| POST   | /api/v1/admin/balances            | Crear balance              |
+| PUT    | /api/v1/admin/balances/{id}       | Actualizar balance         |
+| DELETE | /api/v1/admin/balances/{id}       | Eliminar balance           |
 
 ---
 
@@ -240,10 +210,11 @@ Para activar las estadisticas en tiempo real:
 | type             | enum: cobro, pago          |
 | amount           | decimal(15,2)              |
 | currency         | enum: ARS, USD, EUR       |
-| record_date      | date                       |
+| record_date      | date (nullable)            |
 | official         | boolean                    |
-| carried_out      | boolean                    |
 | links            | json (nullable)            |
+| entity           | varchar (nullable)         |
+| comments         | text (nullable)            |
 | created_at       | timestamp                  |
 | updated_at       | timestamp                  |
 
@@ -261,6 +232,9 @@ Para activar las estadisticas en tiempo real:
 | official             | boolean                    |
 | clauses              | json (nullable)            |
 | links                | json (nullable)            |
+| loan                 | json (nullable)            |
+| signing_date         | date (nullable)            |
+| termination_date     | date (nullable)            |
 | created_at           | timestamp                  |
 | updated_at           | timestamp                  |
 
@@ -270,29 +244,7 @@ Para activar las estadisticas en tiempo real:
 
 - **Historial de cambios:** Estructura preparada para agregar tabla de auditorias (model events)
 - **Exportacion CSV:** Comando `php artisan export:csv {table}` implementado
-- **Automatizacion de estadisticas:** BeSoccerService con cache Redis, listo para scheduled tasks
 - **Nuevas secciones:** Arquitectura modular para agregar nuevos modelos y controladores
-
----
-
-## Desarrollo
-
-### Backend
-
-```bash
-make shell-api
-composer install
-php artisan migrate
-php artisan db:seed
-```
-
-### Frontend
-
-```bash
-make shell-frontend
-npm install
-npm run dev
-```
 
 ---
 
@@ -300,10 +252,10 @@ npm run dev
 
 Las contribuciones son bienvenidas. Leé [CONTRIBUTING.md](CONTRIBUTING.md) para saber cómo empezar.
 
-Para reportar errores o sugerir mejoras, usá los [Issues de GitHub](https://github.com/glesende/numeros-rojos/issues).
+Para reportar errores o sugerir mejoras, usá los [Issues de GitHub](https://github.com/lucascapocasa1/Numeros-BocaJuniors/issues).
 
 ---
 
 ## Licencia
 
-MIT License. Ver [LICENSE](LICENSE) para más detalles.
+MIT License. Ver [LICENSE](LICENSE) para mas detalles.

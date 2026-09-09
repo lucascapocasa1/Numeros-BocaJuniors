@@ -2,13 +2,11 @@ import { useState, useEffect, useMemo, useCallback } from 'react';
 import { Link } from 'react-router-dom';
 import { getContracts, getRights, getRumors, getStadium, getElections, sendContact, getContractRecentMoves, getElectionListLogoUrl } from '../api/endpoints';
 import { usePageMeta } from '../hooks/usePageMeta';
-import PlayerMatchesModal from '../components/stats/PlayerMatchesModal';
 import ElectionListModal from '../components/ElectionListModal';
 import ElectionMethodologyModal from '../components/ElectionMethodologyModal';
 import Loader from '../components/common/Loader';
 import MonthlyBarChart from '../components/economy/MonthlyBarChart';
 import BalanceLineChart from '../components/balances/BalanceLineChart';
-import StatsWidget from '../components/stats/StatsWidget';
 import useSectionSettings from '../hooks/useSectionSettings';
 import { translatePosition } from '../utils/positions';
 import ContractWidgets from '../components/contracts/ContractWidgets';
@@ -392,8 +390,6 @@ export default function HomePage() {
   const [electionsLoading, setElectionsLoading] = useState(false);
   const [selectedElectionList, setSelectedElectionList] = useState(null);
   const [showElectionMethodology, setShowElectionMethodology] = useState(false);
-  const [selectedContractPlayer, setSelectedContractPlayer] = useState(null);
-  const [selectedRumorPlayer, setSelectedRumorPlayer] = useState(null);
   const [recentMoves, setRecentMoves] = useState({ altas: [], bajas: [] });
   const [moveFilter, setMoveFilter] = useState(null);
   const { sections } = useSectionSettings();
@@ -414,7 +410,7 @@ export default function HomePage() {
   }, []);
 
   usePageMeta({
-    title: 'Números Azules - Portal de datos del Club Atlético Boca Juniors',
+    title: 'Números Boca Juniors - Portal de datos del Club Atlético Boca Juniors',
     description: 'Portal de transparencia económica y deportiva del Club Atlético Boca Juniors. Contratos de jugadores, compromisos económicos, deudas, balances oficiales y estadísticas.',
     path: '/',
   });
@@ -520,8 +516,6 @@ export default function HomePage() {
 
   return (
     <>
-    <PlayerMatchesModal player={selectedContractPlayer} showContract={true} onClose={() => setSelectedContractPlayer(null)} />
-    <PlayerMatchesModal player={selectedRumorPlayer} showContract={false} onClose={() => setSelectedRumorPlayer(null)} comparePool={selectedRumorPlayer?.role != null ? rumors.filter((r) => r.role === selectedRumorPlayer.role) : rumors} />
     <ElectionListModal list={selectedElectionList} onClose={() => setSelectedElectionList(null)} />
     <ElectionMethodologyModal open={showElectionMethodology} onClose={() => setShowElectionMethodology(false)} />
     <div>
@@ -537,7 +531,7 @@ export default function HomePage() {
           <div className="flex items-center justify-center gap-3">
             <span className="text-xs text-white/60">Compartir</span>
             <a
-              href={`https://wa.me/?text=${encodeURIComponent('Los datos económicos y deportivos de Boca Juniors, centralizados: contratos, deudas, balances y más. Todo en Números Azules 👉 https://www.numerosazules.net')}`}
+              href={`https://wa.me/?text=${encodeURIComponent('Los datos económicos y deportivos de Boca Juniors, centralizados: contratos, deudas, balances y más. Todo en Números Boca Juniors 👉 https://www.numerosbocajuniors.net')}`}
               target="_blank"
               rel="noopener noreferrer"
               className="text-white/70 hover:text-green-400 transition-colors"
@@ -548,7 +542,7 @@ export default function HomePage() {
               </svg>
             </a>
             <a
-              href={`https://x.com/intent/tweet?text=${encodeURIComponent('Los datos que todo socio de Boca Juniors tiene que saber: contratos, deudas, balances y más. Vía @NumerosAzules 👉 https://www.numerosazules.net')}`}
+              href={`https://x.com/intent/tweet?text=${encodeURIComponent('Los datos que todo socio de Boca Juniors tiene que saber: contratos, deudas, balances y más. Vía @NumerosAzules 👉 https://www.numerosbocajuniors.net')}`}
               target="_blank"
               rel="noopener noreferrer"
               className="text-white/70 hover:text-white transition-colors"
@@ -616,7 +610,6 @@ export default function HomePage() {
                     key={r.id}
                     player={r}
                     showPositions={true}
-                    onClick={r.external_id ? () => setSelectedRumorPlayer({ id: r.external_id, nick: r.full_name, image: r.player_avatar, role: r.role }) : undefined}
                   />
                 ))}
               </div>
@@ -626,7 +619,7 @@ export default function HomePage() {
           <div className="flex items-center gap-2 mt-4">
             <span className="text-xs text-gray-400">Compartir</span>
             <a
-              href={`https://wa.me/?text=${encodeURIComponent('¡Mirá los jugadores que suenan para Boca Juniors! Datos y estadísticas en Números Azules 👉 https://www.numerosazules.net/#rumores')}`}
+              href={`https://wa.me/?text=${encodeURIComponent('¡Mirá los jugadores que suenan para Boca Juniors! Datos y estadísticas en Números Boca Juniors 👉 https://www.numerosbocajuniors.net/#rumores')}`}
               target="_blank"
               rel="noopener noreferrer"
               className="text-gray-400 hover:text-green-600 transition-colors"
@@ -637,7 +630,7 @@ export default function HomePage() {
               </svg>
             </a>
             <a
-              href={`https://x.com/intent/tweet?text=${encodeURIComponent('Los rumores de refuerzos de Boca Juniors con estadísticas reales. Vía @NumerosAzules 👉 https://www.numerosazules.net/#rumores')}`}
+              href={`https://x.com/intent/tweet?text=${encodeURIComponent('Los rumores de refuerzos de Boca Juniors con estadísticas reales. Vía @NumerosAzules 👉 https://www.numerosbocajuniors.net/#rumores')}`}
               target="_blank"
               rel="noopener noreferrer"
               className="text-gray-400 hover:text-gray-900 transition-colors"
@@ -712,7 +705,7 @@ export default function HomePage() {
           <div className="flex items-center gap-2 mt-4">
             <span className="text-xs text-gray-400">Compartir</span>
             <a
-              href={`https://wa.me/?text=${encodeURIComponent('¡Mirá las listas, candidatos y propuestas para las elecciones de Boca Juniors! Todo en Números Azules 👉 https://www.numerosazules.net/#elecciones')}`}
+              href={`https://wa.me/?text=${encodeURIComponent('¡Mirá las listas, candidatos y propuestas para las elecciones de Boca Juniors! Todo en Números Boca Juniors 👉 https://www.numerosbocajuniors.net/#elecciones')}`}
               target="_blank"
               rel="noopener noreferrer"
               className="text-gray-400 hover:text-green-600 transition-colors"
@@ -723,7 +716,7 @@ export default function HomePage() {
               </svg>
             </a>
             <a
-              href={`https://x.com/intent/tweet?text=${encodeURIComponent('Las listas, candidatos y propuestas para las elecciones de Boca Juniors. Vía @NumerosAzules 👉 https://www.numerosazules.net/#elecciones')}`}
+              href={`https://x.com/intent/tweet?text=${encodeURIComponent('Las listas, candidatos y propuestas para las elecciones de Boca Juniors. Vía @NumerosAzules 👉 https://www.numerosbocajuniors.net/#elecciones')}`}
               target="_blank"
               rel="noopener noreferrer"
               className="text-gray-400 hover:text-gray-900 transition-colors"
@@ -798,8 +791,7 @@ export default function HomePage() {
                   {combinedMoves.map((item) => (
                     <div
                       key={`${item.tipo}-${item.id}`}
-                      onClick={item.external_id ? () => setSelectedContractPlayer({ id: item.external_id, nick: item.full_name, image: item.player_avatar }) : undefined}
-                      className={`flex flex-col items-center gap-1.5 flex-shrink-0 w-24 group ${item.external_id ? 'cursor-pointer' : 'cursor-default'}`}
+                      className={`flex flex-col items-center gap-1.5 flex-shrink-0 w-24 group cursor-default`}
                     >
                       <div className="relative">
                         <img
@@ -886,7 +878,6 @@ export default function HomePage() {
                   <ContractCard
                     key={c.id}
                     contract={c}
-                    onClick={c.external_id ? () => setSelectedContractPlayer({ id: c.external_id, nick: c.full_name, image: c.player_avatar }) : undefined}
                   />
                 ))}
               </div>
@@ -933,7 +924,6 @@ export default function HomePage() {
                     key={r.id}
                     player={r}
                     showPositions={true}
-                    onClick={r.external_id ? () => setSelectedRumorPlayer({ id: r.external_id, nick: r.full_name, image: r.player_avatar }) : undefined}
                   />
                 ))}
               </div>
@@ -943,7 +933,7 @@ export default function HomePage() {
           <div className="flex items-center gap-2 mt-4">
             <span className="text-xs text-gray-400">Compartir</span>
             <a
-              href={`https://wa.me/?text=${encodeURIComponent('¡Mirá los derechos económicos que tiene Boca Juniors sobre sus jugadores! Datos en Números Azules 👉 https://www.numerosazules.net/#derechos')}`}
+              href={`https://wa.me/?text=${encodeURIComponent('¡Mirá los derechos económicos que tiene Boca Juniors sobre sus jugadores! Datos en Números Boca Juniors 👉 https://www.numerosbocajuniors.net/#derechos')}`}
               target="_blank"
               rel="noopener noreferrer"
               className="text-gray-400 hover:text-green-600 transition-colors"
@@ -954,7 +944,7 @@ export default function HomePage() {
               </svg>
             </a>
             <a
-              href={`https://x.com/intent/tweet?text=${encodeURIComponent('Los derechos económicos de Boca Juniors sobre sus jugadores, con detalle por cada uno. Vía @NumerosAzules 👉 https://www.numerosazules.net/#derechos')}`}
+              href={`https://x.com/intent/tweet?text=${encodeURIComponent('Los derechos económicos de Boca Juniors sobre sus jugadores, con detalle por cada uno. Vía @NumerosAzules 👉 https://www.numerosbocajuniors.net/#derechos')}`}
               target="_blank"
               rel="noopener noreferrer"
               className="text-gray-400 hover:text-gray-900 transition-colors"
@@ -977,19 +967,6 @@ export default function HomePage() {
           </div>
         </section>
       )}
-
-      {/* Stats widget */}
-      <section id="estadisticas" className="max-w-6xl mx-auto px-4 py-4">
-        <div className="card overflow-hidden">
-            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 mb-4">
-              <h2 className="text-xl font-bold">Estadísticas</h2>
-              <Link to="/estadisticas" className="text-sm text-azul hover:underline font-medium">
-                Ver todo →
-              </Link>
-            </div>
-            <StatsWidget />
-          </div>
-      </section>
 
       {/* Estadio */}
       {sections.section_estadio_enabled !== false && (
@@ -1025,7 +1002,7 @@ export default function HomePage() {
         <div className="space-y-4">
         <section className="card">
           <p className="text-sm text-gray-600">
-            Números Azules es un proyecto independiente de datos abiertos. No es un sitio
+            Números Boca Juniors es un proyecto independiente de datos abiertos. No es un sitio
             oficial del Club Atlético Boca Juniors. No genera contenido propio.
             El objetivo es mantener un punto centralizado de datos, recopilando publicaciones
             oficiales y extraoficiales relacionadas con el club.
@@ -1051,10 +1028,6 @@ export default function HomePage() {
               Balances y otros documentos oficiales, notas periodísticas de medios especializados
               y/o partidarios.
             </li>
-            <li>
-              <strong>Estadísticas:</strong> Las estadísticas deportivas son obtenidas de la API de 
-              BeSoccer.
-            </li>
           </ul>
         </section>
 
@@ -1069,7 +1042,7 @@ export default function HomePage() {
         <section className="card border border-azul/20">
           <h3 className="text-lg font-bold mb-3">Proyecto replicable</h3>
           <p className="text-sm text-gray-600 mb-3">
-            Números Azules es un proyecto de código abierto pensado para ser adaptado a otras
+            Números Boca Juniors es un proyecto de código abierto pensado para ser adaptado a otras
             instituciones. El repositorio se puede clonar, adaptar y distribuir libre bajo licencia MIT.
           </p>
           <a

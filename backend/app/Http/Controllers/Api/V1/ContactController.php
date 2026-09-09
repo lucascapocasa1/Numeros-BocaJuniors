@@ -27,7 +27,7 @@ class ContactController extends Controller
 
         Mail::raw($body, function ($message) use ($adminEmail, $userEmail) {
             $message->to($adminEmail)
-                    ->subject('Números Azules – Aporte / Corrección');
+                    ->subject('Números Boca Juniors – Aporte / Corrección');
 
             if ($userEmail) {
                 $message->replyTo($userEmail);

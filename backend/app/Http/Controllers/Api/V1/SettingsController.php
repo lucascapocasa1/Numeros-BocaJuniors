@@ -58,9 +58,6 @@ class SettingsController extends Controller
     public function update(Request $request): JsonResponse
     {
         $this->validate($request, [
-            'data_service'               => 'sometimes|in:disabled,besoccer',
-            'besoccer_api_key'           => 'sometimes|nullable|string',
-            'besoccer_team_id'           => 'sometimes|nullable|string|max:50',
             'openai_api_key'             => 'sometimes|nullable|string',
             'openai_model'               => 'sometimes|nullable|string|max:100',
             'twitter_api_key'            => 'sometimes|nullable|string',
@@ -80,7 +77,7 @@ class SettingsController extends Controller
         ]);
 
         $allowed = [
-            'data_service', 'besoccer_api_key', 'besoccer_team_id', 'openai_api_key', 'openai_model',
+            'openai_api_key', 'openai_model',
             'twitter_api_key',
             'section_economia_enabled', 'section_contratos_enabled', 'section_derechos_enabled',
             'section_balances_enabled', 'section_estadio_enabled', 'section_rumores_enabled',

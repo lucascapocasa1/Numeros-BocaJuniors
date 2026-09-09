@@ -35,7 +35,7 @@ export default function ContractsPage() {
   });
 
   usePageMeta({
-    title: 'Contratos de jugadores de Boca Juniors | Números Azules',
+    title: 'Contratos de jugadores de Boca Juniors | Números Boca Juniors',
     description: 'Contratos profesionales del plantel de Boca Juniors: fechas de vencimiento, salarios estimados, cláusulas y porcentajes del pase. Datos actualizados.',
     path: '/contratos',
   });

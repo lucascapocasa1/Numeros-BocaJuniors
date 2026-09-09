@@ -24,7 +24,6 @@ $app->configure('auth');
 $app->configure('database');
 $app->configure('cache');
 $app->configure('jwt');
-$app->configure('besoccer');
 $app->configure('cors');
 $app->configure('filesystems');
 $app->configure('mail');

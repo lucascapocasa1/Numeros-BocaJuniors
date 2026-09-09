@@ -119,7 +119,7 @@ export default function ContractDetailPage() {
   }, [id]);
 
   const metaTitle = contract
-    ? `Contrato de ${contract.full_name} en Boca Juniors | Números Azules`
+    ? `Contrato de ${contract.full_name} en Boca Juniors | Números Boca Juniors`
     : null;
 
   const metaDescription = contract
@@ -134,7 +134,7 @@ export default function ContractDetailPage() {
         const parts = [`Contrato de ${contract.full_name} en el Club Atlético Boca Juniors.`];
         if (salary) parts.push(`Salario estimado: ${salary}.`);
         if (contract.expiration_date) parts.push(`Vencimiento: ${formatDate(contract.expiration_date)}.`);
-        parts.push('Datos en Números Azules.');
+        parts.push('Datos en Números Boca Juniors.');
         return parts.join(' ');
       })()
     : null;
@@ -146,16 +146,16 @@ export default function ContractDetailPage() {
       '@type': 'Article',
       headline: `Contrato de ${contract.full_name} en Boca Juniors`,
       description: metaDescription,
-      url: `https://www.numerosazules.net/contratos/${id}`,
+      url: `https://www.numerosbocajuniors.net/contratos/${id}`,
       dateModified: contract.updated_at,
       publisher: {
         '@type': 'Organization',
-        name: 'Números Azules',
-        url: 'https://www.numerosazules.net',
+        name: 'Números Boca Juniors',
+        url: 'https://www.numerosbocajuniors.net',
       },
       mainEntityOfPage: {
         '@type': 'WebPage',
-        '@id': `https://www.numerosazules.net/contratos/${id}`,
+        '@id': `https://www.numerosbocajuniors.net/contratos/${id}`,
       },
       about: {
         '@type': 'Person',
@@ -194,7 +194,7 @@ export default function ContractDetailPage() {
         <h1 className="text-xl font-bold mb-2">{contract.full_name}</h1>
 
         {(() => {
-          const url = `https://www.numerosazules.net/contratos/${id}`;
+          const url = `https://www.numerosbocajuniors.net/contratos/${id}`;
           const salary = contract.estimated_salary
             ? new Intl.NumberFormat('es-AR', {
                 style: 'currency',
@@ -203,8 +203,8 @@ export default function ContractDetailPage() {
               }).format(contract.estimated_salary)
             : null;
           const waText = salary
-            ? `Mirá el contrato de ${contract.full_name} en Boca Juniors: cobra ${salary} estimado. Datos en Números Azules 👉 ${url}`
-            : `Mirá el contrato de ${contract.full_name} en Boca Juniors. Datos en Números Azules 👉 ${url}`;
+            ? `Mirá el contrato de ${contract.full_name} en Boca Juniors: cobra ${salary} estimado. Datos en Números Boca Juniors 👉 ${url}`
+            : `Mirá el contrato de ${contract.full_name} en Boca Juniors. Datos en Números Boca Juniors 👉 ${url}`;
           const xText = salary
             ? `Contrato de ${contract.full_name} (Boca Juniors): salario estimado ${salary}. Vía @NumerosAzules 👉 ${url}`
             : `Contrato de ${contract.full_name} (Boca Juniors). Vía @NumerosAzules 👉 ${url}`;

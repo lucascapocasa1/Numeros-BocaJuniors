@@ -4,32 +4,14 @@ namespace App\Http\Controllers\Api\V1;
 
 use App\Http\Controllers\Controller;
 use App\Models\Contract;
-use App\Services\BeSoccerService;
 use Carbon\Carbon;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
 class ContractController extends Controller
 {
-    private BeSoccerService $besoccerService;
-
-    public function __construct(BeSoccerService $besoccerService)
-    {
-        $this->besoccerService = $besoccerService;
-    }
-
     private function enrichWithPlayerAvatar(array $contract): array
     {
-        if (!empty($contract['external_id'])) {
-            $playerFull = $this->besoccerService->getPlayerData($contract['external_id']);
-            if ($playerFull['success'] ?? false) {
-                $defaultAvatar = rtrim(env('FRONTEND_URL', 'http://localhost:5173'), '/') . '/default-avatar.svg';
-                $data = $playerFull['data'];
-                $contract['player_avatar'] = $data['player_avatar'] ?? $defaultAvatar;
-                $pos1 = $data['pos1'] ?? null;
-                $contract['positions'] = !empty($pos1) ? [['pos' => $pos1]] : [];
-            }
-        }
         return $contract;
     }
 

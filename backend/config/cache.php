@@ -14,5 +14,5 @@ return [
         ],
     ],
 
-    'prefix' => 'numeros_rojos_cache',
+    'prefix' => 'numeros_bocajuniors_cache',
 ];

@@ -346,10 +346,10 @@ PROMPT;
 Sos un asistente especializado en gestión de información de clubes de fútbol argentinos.
 
 El sistema maneja:
-- Contratos: full_name, expiration_date, signing_date, termination_date, estimated_salary, currency (ARS/USD/EUR), clauses (array), links (array de {url, label, official}), loan (objeto o null), external_id (número de BeSoccer)
+- Contratos: full_name, expiration_date, signing_date, termination_date, estimated_salary, currency (ARS/USD/EUR), clauses (array), links (array de {url, label, official}), loan (objeto o null), external_id (ID externo del jugador)
 - Registros económicos (EconomyRecord): description, entity, type (ingreso|egreso|transferencia|pase|otro), amount, currency, record_date, carried_out_date (fecha de confirmación, null si no confirmado), links
-- Derechos (Right): full_name, clauses, links, external_id (número de BeSoccer)
-- Rumores de mercado (Rumor): full_name, external_id (BeSoccer — OBLIGATORIO), status (rumor|contratado), links
+- Derechos (Right): full_name, clauses, links, external_id (ID externo del jugador)
+- Rumores de mercado (Rumor): full_name, external_id (ID externo del jugador — OBLIGATORIO), status (rumor|contratado), links
 
 Tu tarea: dados los tweets relevantes y los resultados de búsqueda, determiná qué acciones concretas se deben tomar.
 
@@ -373,11 +373,11 @@ REGLAS FUNDAMENTALES que debés respetar estrictamente:
    - "firma por N años" → calculá desde la fecha actual y usá el 31/12 del año N desde ahora (o 30/06 si se menciona mitad de año)
    - Ante la duda entre 31/12 y 30/06, usá 31/12.
 
-4. EXTERNAL_ID DE BESOCCER: Si necesitás crear un contrato, un derecho o un rumor y no conocés el external_id del jugador, podés obtenerlo buscando en https://www.besoccer.com/search/{nombre-del-jugador}. En esa página aparece una lista de jugadores; la URL de cada perfil contiene el ID numérico al final (por ejemplo: https://www.besoccer.com/player/nombre-jugador-123456 → external_id = 123456). Incluí el external_id en los datos si podés determinarlo con confianza; si no, dejalo en null.
+4. EXTERNAL_ID: Si necesitás crear un contrato, un derecho o un rumor y no conocés el external_id del jugador, dejalo en null. El external_id es un identificador numérico opcional que puede venir de fuentes externas.
 
 5. RUMORES — REGLAS ESPECÍFICAS:
    - create_rumor y add_source_to_rumor SOLO pueden originarse en cuentas [No oficial]. Los tweets [OFICIAL] nunca crean rumores.
-   - El external_id de BeSoccer es OBLIGATORIO para create_rumor. Si no podés determinarlo con confianza, usá no_action en lugar de crear el rumor sin ID.
+   - El external_id es OBLIGATORIO para create_rumor. Si no podés determinarlo con confianza, usá no_action en lugar de crear el rumor sin ID.
    - Si un jugador ya está en la base como rumor y se confirma su fichaje, podés usar update_rumor con status="contratado"; esta acción SÍ puede provenir de cuentas [OFICIAL].
 
 Para add_source_*: el objeto data debe tener {url: null, label: "...", official: true/false}.
@@ -531,7 +531,7 @@ PROMPT;
     private function createRumor(array $data): array
     {
         if (empty($data['external_id'])) {
-            throw new \RuntimeException('create_rumor requiere external_id (BeSoccer ID)');
+            throw new \RuntimeException('create_rumor requiere external_id');
         }
         $allowed = ['full_name', 'external_id', 'status', 'links'];
         $rumor   = Rumor::create(array_intersect_key($data, array_flip($allowed)));
@@ -626,7 +626,7 @@ PROMPT;
         }
 
         $dryTag  = $this->dryRun ? ' [DRY RUN]' : '';
-        $subject = "Números Azules – Monitor X{$dryTag}: reporte de actividad";
+        $subject = "Números Boca Juniors – Monitor X{$dryTag}: reporte de actividad";
 
         $body = $this->buildEmailBody($report);
 

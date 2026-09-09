@@ -35,7 +35,7 @@ export default function EconomyPage() {
   });
 
   usePageMeta({
-    title: 'Compromisos económicos de Boca Juniors | Números Azules',
+    title: 'Compromisos económicos de Boca Juniors | Números Boca Juniors',
     description: 'Registro completo de compromisos económicos, deudas, pagos y cobros del Club Atlético Boca Juniors. Fuentes periodísticas y oficiales.',
     path: '/economia',
   });

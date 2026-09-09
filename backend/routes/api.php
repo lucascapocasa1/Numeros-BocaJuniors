@@ -46,13 +46,6 @@ $router->group(['prefix' => 'api/v1', 'namespace' => 'Api\V1'], function () use 
     // Contact
     $router->post('contact', 'ContactController@send');
 
-    // Stats (BeSoccer proxy)
-    $router->get('player/{id}/stats', 'StatsController@playerStats');
-    $router->get('player/{id}/matches', 'StatsController@playerMatches');
-    $router->get('player/{id}', 'StatsController@playerData');
-    $router->get('league/stats', 'StatsController@leagueStats');
-    $router->get('team', 'StatsController@team');
-
     // Refresh no necesita jwt.auth: acepta tokens expirados por diseño
     $router->post('admin/auth/refresh', ['uses' => 'Api\V1\AuthController@refresh']);
 

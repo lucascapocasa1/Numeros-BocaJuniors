@@ -84,7 +84,7 @@ export default function RumorForm({ initial, onSubmit, loading }) {
       </div>
 
       <div>
-        <label className="block text-xs font-medium text-gray-500 mb-1">ID Externo (BeSoccer)</label>
+        <label className="block text-xs font-medium text-gray-500 mb-1">ID Externo</label>
         <input
           type="text"
           value={form.external_id}

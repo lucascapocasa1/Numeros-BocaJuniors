@@ -14,48 +14,48 @@ import { fileURLToPath } from 'url';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const distDir = join(__dirname, '..', 'dist');
-const baseUrl = 'https://www.numerosazules.net';
+const baseUrl = 'https://www.numerosbocajuniors.net';
 
 const routes = [
   {
     path: 'contratos',
-    title: 'Contratos de jugadores de Boca Juniors | Números Azules',
+    title: 'Contratos de jugadores de Boca Juniors | Números Boca Juniors',
     description:
       'Contratos profesionales del plantel de Boca Juniors: fechas de vencimiento, salarios estimados, cláusulas y porcentajes del pase. Datos actualizados.',
   },
   {
     path: 'economia',
-    title: 'Compromisos económicos de Boca Juniors | Números Azules',
+    title: 'Compromisos económicos de Boca Juniors | Números Boca Juniors',
     description:
       'Registro completo de compromisos económicos, deudas, pagos y cobros del Club Atlético Boca Juniors. Fuentes periodísticas y oficiales.',
   },
   {
     path: 'balances',
-    title: 'Balances oficiales de Boca Juniors | Números Azules',
+    title: 'Balances oficiales de Boca Juniors | Números Boca Juniors',
     description:
       'Balances patrimoniales y estados contables oficiales del Club Atlético Boca Juniors. Evolución histórica y desglose detallado.',
   },
   {
     path: 'estadisticas',
-    title: 'Estadísticas del plantel de Boca Juniors | Números Azules',
+    title: 'Estadísticas del plantel de Boca Juniors | Números Boca Juniors',
     description:
       'Tabla de posiciones y fichas estadísticas de los jugadores del plantel de Boca Juniors en el torneo actual.',
   },
   {
     path: 'estadio',
-    title: 'Estadio Alberto J. Armando (La Bombonera) | Números Azules',
+    title: 'Estadio Alberto J. Armando (La Bombonera) | Números Boca Juniors',
     description:
       'Capacidad, sectores y datos del Estadio Alberto J. Armando (La Bombonera) del Club Atlético Boca Juniors.',
   },
   {
     path: 'derechos',
-    title: 'Derechos sobre jugadores de Boca Juniors | Números Azules',
+    title: 'Derechos sobre jugadores de Boca Juniors | Números Boca Juniors',
     description:
       'Derechos económicos del Club Atlético Boca Juniors sobre sus jugadores: porcentajes del pase, cláusulas y fuentes. No incluye derechos de formación.',
   },
   {
     path: 'elecciones',
-    title: 'Elecciones de Boca Juniors | Números Azules',
+    title: 'Elecciones de Boca Juniors | Números Boca Juniors',
     description:
       'Las listas que se postulan en las elecciones de Boca Juniors: candidatos, propuestas, compromisos y metas verificables, analizados con el mismo criterio para todas.',
   },
@@ -136,7 +136,7 @@ if (apiUrl) {
     let count = 0;
     for (const list of lists) {
       if (!list.slug) continue;
-      const title = `${list.name} | Elecciones | Números Azules`;
+      const title = `${list.name} | Elecciones | Números Boca Juniors`;
       const description = `Candidatos, propuestas, compromisos y metas de ${list.name} para las elecciones de Boca Juniors.`;
       writeRoute(`elecciones/${list.slug}`, title, description);
       count++;

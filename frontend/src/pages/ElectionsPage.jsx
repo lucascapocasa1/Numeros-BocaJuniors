@@ -11,7 +11,7 @@ export default function ElectionsPage() {
   const [showMethodology, setShowMethodology] = useState(false);
 
   usePageMeta({
-    title: 'Elecciones de Boca Juniors | Números Azules',
+    title: 'Elecciones de Boca Juniors | Números Boca Juniors',
     description: 'Las listas que se postulan en las elecciones de Boca Juniors: candidatos, propuestas, compromisos y metas verificables, analizados con el mismo criterio para todas.',
     path: '/elecciones',
   });
@@ -40,7 +40,7 @@ export default function ElectionsPage() {
       <div className="flex items-center gap-2 mb-1">
         <span className="text-xs text-gray-400">Compartir</span>
         <a
-          href={`https://wa.me/?text=${encodeURIComponent('¡Mirá las listas, candidatos y propuestas para las elecciones de Boca Juniors! Todo en Números Azules 👉 ' + window.location.href)}`}
+          href={`https://wa.me/?text=${encodeURIComponent('¡Mirá las listas, candidatos y propuestas para las elecciones de Boca Juniors! Todo en Números Boca Juniors 👉 ' + window.location.href)}`}
           target="_blank"
           rel="noopener noreferrer"
           className="text-gray-400 hover:text-green-600 transition-colors"

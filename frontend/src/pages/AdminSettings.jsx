@@ -23,9 +23,6 @@ export default function AdminSettings() {
   const [success, setSuccess] = useState('');
   const [loading, setLoading] = useState(false);
 
-  const [dataService, setDataService] = useState('disabled');
-  const [besoccerApiKey, setBesoccerApiKey] = useState('');
-  const [besoccerTeamId, setBesoccerTeamId] = useState('');
   const [serviceError, setServiceError] = useState('');
   const [serviceSuccess, setServiceSuccess] = useState('');
   const [serviceLoading, setServiceLoading] = useState(false);
@@ -63,9 +60,6 @@ export default function AdminSettings() {
     getSettings()
       .then((res) => {
         const data = res.data?.data || {};
-        setDataService(data.data_service || 'disabled');
-        setBesoccerApiKey(data.besoccer_api_key || '');
-        setBesoccerTeamId(data.besoccer_team_id || '');
         setOpenaiApiKey(data.openai_api_key || '');
         setOpenaiModel(data.openai_model || 'gpt-4o');
         setChartScaleUsd(data.chart_scale_usd ?? '');
@@ -124,12 +118,7 @@ export default function AdminSettings() {
     setServiceSuccess('');
     setServiceLoading(true);
     try {
-      const payload = { data_service: dataService };
-      if (dataService === 'besoccer') {
-        payload.besoccer_api_key = besoccerApiKey;
-        payload.besoccer_team_id = besoccerTeamId;
-      }
-      await updateSettings(payload);
+      await updateSettings({});
       setServiceSuccess('Configuración guardada correctamente');
     } catch (err) {
       setServiceError(err.response?.data?.error || 'Error al guardar la configuración');
@@ -227,72 +216,6 @@ export default function AdminSettings() {
       <div className="mb-6">
         <Link to="/admin" className="text-azul text-sm hover:underline">&larr; Admin</Link>
         <h1 className="text-2xl font-extrabold">Configuracion</h1>
-      </div>
-
-      {/* Data service */}
-      <div className="card mb-6">
-        <h2 className="text-lg font-bold mb-4">Servicio de datos</h2>
-
-        {!settingsLoaded ? (
-          <p className="text-sm text-gray-500">Cargando...</p>
-        ) : (
-          <form onSubmit={handleServiceSubmit} className="space-y-4">
-            {serviceError && <ErrorMessage message={serviceError} />}
-            {serviceSuccess && (
-              <div className="p-3 bg-green-50 text-green-700 rounded-lg text-sm">
-                {serviceSuccess}
-              </div>
-            )}
-
-            <div>
-              <label className="block text-sm font-medium mb-1">Servicio</label>
-              <select
-                value={dataService}
-                onChange={(e) => setDataService(e.target.value)}
-                className="input-field w-full"
-              >
-                <option value="disabled">Desactivado</option>
-                <option value="besoccer">BeSoccer</option>
-              </select>
-            </div>
-
-            {dataService === 'besoccer' && (
-              <>
-                <div>
-                  <label className="block text-sm font-medium mb-1">API Key de BeSoccer</label>
-                  <input
-                    type="text"
-                    value={besoccerApiKey}
-                    onChange={(e) => setBesoccerApiKey(e.target.value)}
-                    className="input-field w-full"
-                    placeholder="Introduce la API Key"
-                  />
-                </div>
-                <div>
-                  <label className="block text-sm font-medium mb-1">ID del equipo destacado</label>
-                  <input
-                    type="text"
-                    value={besoccerTeamId}
-                    onChange={(e) => setBesoccerTeamId(e.target.value)}
-                    className="input-field w-full"
-                    placeholder="Ej: 1373"
-                  />
-                  <p className="text-xs text-gray-400 mt-1">
-                    Se usa para resaltar el equipo en las tablas de estadísticas.
-                  </p>
-                </div>
-              </>
-            )}
-
-            <button
-              type="submit"
-              disabled={serviceLoading}
-              className="btn-primary w-full"
-            >
-              {serviceLoading ? 'Guardando...' : 'Guardar configuracion'}
-            </button>
-          </form>
-        )}
       </div>
 
       {/* OpenAI configuration */}

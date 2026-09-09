@@ -21,7 +21,7 @@ export default function ElectionDetailPage() {
   }, [slug]);
 
   usePageMeta({
-    title: list ? `${list.name} | Elecciones | Números Azules` : 'Elecciones | Números Azules',
+    title: list ? `${list.name} | Elecciones | Números Boca Juniors` : 'Elecciones | Números Boca Juniors',
     description: list ? `Candidatos, propuestas, compromisos y metas de ${list.name} para las elecciones de Boca Juniors.` : null,
     path: `/elecciones/${slug}`,
   });

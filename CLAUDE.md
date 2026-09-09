@@ -1,7 +1,7 @@
-# Números Azules - Claude Development Context
+# Números Boca Juniors - Claude Development Context
 
 ## Project Overview
-- **Name**: Números Azules
+- **Name**: Números Boca Juniors
 - **Code**: NR
 - **Main Branch**: main
 

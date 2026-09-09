@@ -21,7 +21,7 @@ return new class extends Migration
 
         DB::table('users')->insert([
             'name'       => 'Admin',
-            'email'      => 'admin@numerosazules.net',
+            'email'      => 'admin@numerosbocajuniors.net',
             'password'   => Hash::make('password'),
             'created_at' => Carbon::now(),
             'updated_at' => Carbon::now(),

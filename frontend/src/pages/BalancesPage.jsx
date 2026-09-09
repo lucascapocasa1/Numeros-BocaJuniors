@@ -30,7 +30,7 @@ export default function BalancesPage() {
   }, []);
 
   usePageMeta({
-    title: 'Balances oficiales de Boca Juniors | Números Azules',
+    title: 'Balances oficiales de Boca Juniors | Números Boca Juniors',
     description: 'Balances patrimoniales y estados contables oficiales del Club Atlético Boca Juniors. Evolución histórica y desglose detallado.',
     path: '/balances',
   });
@@ -48,7 +48,7 @@ export default function BalancesPage() {
       <div className="flex items-center gap-2 mb-4">
         <span className="text-xs text-gray-400">Compartir</span>
         <a
-          href="https://wa.me/?text=Mir%C3%A1%20los%20balances%20oficiales%20de%20Boca%20Juniors%3A%20https%3A%2F%2Fwww.numerosazules.net%2Fbalances"
+          href="https://wa.me/?text=Mir%C3%A1%20los%20balances%20oficiales%20de%20Boca%20Juniors%3A%20https%3A%2F%2Fwww.numerosbocajuniors.net%2Fbalances"
           target="_blank"
           rel="noopener noreferrer"
           className="text-gray-400 hover:text-green-600 transition-colors"
@@ -59,7 +59,7 @@ export default function BalancesPage() {
           </svg>
         </a>
         <a
-          href="https://x.com/intent/tweet?text=Mir%C3%A1%20los%20balances%20oficiales%20de%20Boca%20Juniors%3A%20https%3A%2F%2Fwww.numerosazules.net%2Fbalances"
+          href="https://x.com/intent/tweet?text=Mir%C3%A1%20los%20balances%20oficiales%20de%20Boca%20Juniors%3A%20https%3A%2F%2Fwww.numerosbocajuniors.net%2Fbalances"
           target="_blank"
           rel="noopener noreferrer"
           className="text-gray-400 hover:text-gray-900 transition-colors"

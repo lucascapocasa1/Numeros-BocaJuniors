@@ -24,17 +24,12 @@ services:
       - DB_CONNECTION=mysql
       - DB_HOST=mysql
       - DB_PORT=3306
-      - DB_DATABASE=${DB_DATABASE:-numeros_rojos}
+      - DB_DATABASE=${DB_DATABASE:-numeros_bocajuniors}
       - DB_USERNAME=${DB_USERNAME:-app}
       - DB_PASSWORD=${DB_PASSWORD:-secret}
       - REDIS_HOST=redis
       - REDIS_PORT=6379
       - JWT_SECRET=${JWT_SECRET:-changeme-in-production}
-      - BESOCCER_BASE_URL=${BESOCCER_BASE_URL:-https://apiclient.besoccerapps.com/scripts/api}
-      - CACHE_TTL_STANDINGS=${CACHE_TTL_STANDINGS:-3600}
-      - CACHE_TTL_PLAYER_STATS=${CACHE_TTL_PLAYER_STATS:-1800}
-      - CACHE_TTL_LEAGUE_STATS=${CACHE_TTL_LEAGUE_STATS:-3600}
-      - CACHE_TTL_PLAYER_DATA=${CACHE_TTL_PLAYER_DATA:-86400}
     depends_on:
       mysql:
         condition: service_healthy
@@ -49,7 +44,7 @@ services:
       - "33006:3306"
     environment:
       MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASSWORD:-secret}
-      MYSQL_DATABASE: ${DB_DATABASE:-numeros_rojos}
+      MYSQL_DATABASE: ${DB_DATABASE:-numeros_bocajuniors}
       MYSQL_USER: ${DB_USERNAME:-app}
       MYSQL_PASSWORD: ${DB_PASSWORD:-secret}
     volumes:

@@ -30,7 +30,7 @@ export default function EconomyDetailPage() {
   }, [id]);
 
   const metaTitle = record
-    ? `${record.description} | Números Azules`
+    ? `${record.description} | Números Boca Juniors`
     : null;
 
   const metaDescription = record
@@ -44,7 +44,7 @@ export default function EconomyDetailPage() {
         const parts = [`${tipo} de ${amount}`];
         if (record.entity) parts.push(`relacionado con ${record.entity}`);
         if (record.record_date) parts.push(`(${record.record_date})`);
-        parts.push('— Club Atlético Boca Juniors. Datos en Números Azules.');
+        parts.push('— Club Atlético Boca Juniors. Datos en Números Boca Juniors.');
         return parts.join(' ');
       })()
     : null;
@@ -56,16 +56,16 @@ export default function EconomyDetailPage() {
       '@type': 'Article',
       headline: record.description,
       description: metaDescription,
-      url: `https://www.numerosazules.net/economia/${id}`,
+      url: `https://www.numerosbocajuniors.net/economia/${id}`,
       dateModified: record.updated_at,
       publisher: {
         '@type': 'Organization',
-        name: 'Números Azules',
-        url: 'https://www.numerosazules.net',
+        name: 'Números Boca Juniors',
+        url: 'https://www.numerosbocajuniors.net',
       },
       mainEntityOfPage: {
         '@type': 'WebPage',
-        '@id': `https://www.numerosazules.net/economia/${id}`,
+        '@id': `https://www.numerosbocajuniors.net/economia/${id}`,
       },
     };
   }, [record, id, metaDescription]);
@@ -98,14 +98,14 @@ export default function EconomyDetailPage() {
         <h1 className="text-xl font-bold mb-2">{record.description}</h1>
 
         {(() => {
-          const url = `https://www.numerosazules.net/economia/${id}`;
+          const url = `https://www.numerosbocajuniors.net/economia/${id}`;
           const monto = new Intl.NumberFormat('es-AR', {
             style: 'currency',
             currency: record.currency,
             maximumFractionDigits: 0,
           }).format(record.amount);
           const tipo = record.type === 'cobro' ? 'Cobro' : 'Pago';
-          const waText = `${tipo} de Boca Juniors: ${record.description} — ${monto}. Datos en Números Azules 👉 ${url}`;
+          const waText = `${tipo} de Boca Juniors: ${record.description} — ${monto}. Datos en Números Boca Juniors 👉 ${url}`;
           const xText = `${tipo} de Boca Juniors: ${record.description} (${monto}). Vía @NumerosAzules 👉 ${url}`;
           return (
             <div className="flex items-center gap-2 mb-4">

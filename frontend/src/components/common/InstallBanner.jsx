@@ -10,11 +10,11 @@ export default function InstallBanner() {
       <div className="max-w-3xl mx-auto flex items-center gap-3 px-4 py-3">
         <img
           src="/icons/icon-192.png"
-          alt="Números Azules"
+          alt="Números Boca Juniors"
           className="w-10 h-10 rounded-lg flex-shrink-0"
         />
         <div className="flex-1 min-w-0">
-          <p className="font-semibold text-sm leading-tight">Números Azules siempre a mano</p>
+          <p className="font-semibold text-sm leading-tight">Números Boca Juniors siempre a mano</p>
           {platform === 'ios' ? (
             <p className="text-xs text-gray-500 leading-tight">
               Tocá Compartir <span aria-hidden="true">⎋</span> y luego "Agregar a inicio"

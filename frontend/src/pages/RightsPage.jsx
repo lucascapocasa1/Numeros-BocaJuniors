@@ -90,7 +90,7 @@ export default function RightsPage() {
   const [error, setError] = useState(null);
 
   usePageMeta({
-    title: 'Derechos sobre jugadores de Boca Juniors | Números Azules',
+    title: 'Derechos sobre jugadores de Boca Juniors | Números Boca Juniors',
     description: 'Derechos económicos del Club Atlético Boca Juniors sobre sus jugadores: porcentajes del pase, cláusulas y fuentes. No incluye derechos de formación.',
     path: '/derechos',
   });
@@ -139,7 +139,7 @@ export default function RightsPage() {
       <div className="flex items-center gap-2 mb-6">
         <span className="text-xs text-gray-400">Compartir</span>
         <a
-          href={`https://wa.me/?text=${encodeURIComponent('¡Mirá los derechos económicos que tiene Boca Juniors sobre sus jugadores! Datos en Números Azules 👉 ' + window.location.href)}`}
+          href={`https://wa.me/?text=${encodeURIComponent('¡Mirá los derechos económicos que tiene Boca Juniors sobre sus jugadores! Datos en Números Boca Juniors 👉 ' + window.location.href)}`}
           target="_blank"
           rel="noopener noreferrer"
           className="text-gray-400 hover:text-green-600 transition-colors"

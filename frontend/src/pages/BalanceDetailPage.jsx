@@ -23,7 +23,7 @@ export default function BalanceDetailPage() {
   }, [id]);
 
   const metaTitle = balance
-    ? `Balance ${balance.exercise} de Boca Juniors | Números Azules`
+    ? `Balance ${balance.exercise} de Boca Juniors | Números Boca Juniors`
     : null;
 
   const metaDescription = balance
@@ -35,7 +35,7 @@ export default function BalanceDetailPage() {
           });
           parts.push(`Publicado el ${fecha}.`);
         }
-        parts.push('Datos en Números Azules.');
+        parts.push('Datos en Números Boca Juniors.');
         return parts.join(' ');
       })()
     : null;
@@ -47,16 +47,16 @@ export default function BalanceDetailPage() {
       '@type': 'Article',
       headline: `Balance ${balance.exercise} del Club Atlético Boca Juniors`,
       description: metaDescription,
-      url: `https://www.numerosazules.net/balances/${id}`,
+      url: `https://www.numerosbocajuniors.net/balances/${id}`,
       dateModified: balance.updated_at,
       publisher: {
         '@type': 'Organization',
-        name: 'Números Azules',
-        url: 'https://www.numerosazules.net',
+        name: 'Números Boca Juniors',
+        url: 'https://www.numerosbocajuniors.net',
       },
       mainEntityOfPage: {
         '@type': 'WebPage',
-        '@id': `https://www.numerosazules.net/balances/${id}`,
+        '@id': `https://www.numerosbocajuniors.net/balances/${id}`,
       },
     };
   }, [balance, id, metaDescription]);
@@ -115,8 +115,8 @@ export default function BalanceDetailPage() {
 
         {/* Share buttons */}
         {(() => {
-          const url = `https://www.numerosazules.net/balances/${id}`;
-          const waText = `Mirá el balance oficial de Boca Juniors - Ejercicio ${balance.exercise}. Datos en Números Azules 👉 ${url}`;
+          const url = `https://www.numerosbocajuniors.net/balances/${id}`;
+          const waText = `Mirá el balance oficial de Boca Juniors - Ejercicio ${balance.exercise}. Datos en Números Boca Juniors 👉 ${url}`;
           const xText = `Balance oficial de Boca Juniors - Ejercicio ${balance.exercise}. Vía @NumerosAzules 👉 ${url}`;
           return (
             <div className="flex items-center gap-2 mt-3">
