@@ -1,0 +1,11 @@
+<svg viewBox="0 0 150 120" xmlns="http://www.w3.org/2000/svg">
+  <text x="75" y="95"
+        text-anchor="middle"
+        font-family="Georgia, serif"
+        font-size="90"
+        font-weight="bold"
+        fill="#df0d10"
+        letter-spacing="-15">
+    NR
+  </text>
+</svg>

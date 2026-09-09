@@ -1,0 +1,8 @@
+.env
+.env.local
+node_modules/
+vendor/
+mysql-data/
+*.log
+.DS_Store
+backend/supervisord.pid
